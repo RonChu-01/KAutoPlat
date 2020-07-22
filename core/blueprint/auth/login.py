@@ -3,7 +3,7 @@
 # Copyright (c) 2020 3KWan.
 # Description :
 
-from flask import Blueprint, render_template, request, jsonify, make_response
+from flask import Blueprint, render_template, request, jsonify, make_response, session
 
 bp = Blueprint("login", __name__, url_prefix="/login")
 
@@ -24,27 +24,25 @@ def login():
         if not password or not password == "1":
             error = "密码为空或错误"
 
-        return jsonify({
-            "status": 0,
-            "msg": "登录成功",
-            "data": ""
-        })
+        if error is None:
+            # 保存登录信息
+            session["username"] = username
+            session["password"] = password
+            resp = make_response(render_template('index.html'))
+            resp.set_cookie('username', username)
 
-        # if error is None:
-        #     resp = make_response(render_template('index.html'))
-        #     resp.set_cookie('username', username)
-        #     # return resp
-        #     return jsonify({
-        #         "status": 0,
-        #         "msg": "登录成功",
-        #         "data": ""
-        #     })
-        # else:
-        #     return jsonify({
-        #         "status": -1,
-        #         "msg": error,
-        #         "data": ""
-        #     })
+            return jsonify({
+                "status": 0,
+                "msg": "登录成功",
+                "data": ""
+            })
+
+        else:
+            return jsonify({
+                "status": -1,
+                "msg": error,
+                "data": ""
+            })
 
     return render_template("auth/login.html")
 
