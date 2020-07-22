@@ -1,0 +1,9 @@
+div.row {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+pre {
+    white-space: pre-line; <!-- 保留换行符，去除空格 -->
+    color: #858796;
+}

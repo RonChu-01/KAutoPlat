@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% import "macro/pages.html" as pg %}
+
+{% block title %}Blog{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/blog/index.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">随笔</a>
+                    <div class="dropdown-menu">
+                        <!-- 随笔下的子标签，用于筛选 -->
+                        <a class="dropdown-item" href="">学习笔记</a>
+                        <a class="dropdown-item" href="">读书笔记</a>
+                        <a class="dropdown-item" href="">日常随笔</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="">临时遐想</a>
+                        <a class="dropdown-item" href="">灵机一动</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">总结</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="">阶段性总结</a>
+                        <a class="dropdown-item" href="">年终终结</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">心得</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">书/影/音评</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">计划</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="">工作</a>
+                        <a class="dropdown-item" href="">学习</a>
+                        <a class="dropdown-item" href="">运动</a>
+                        <a class="dropdown-item" href="">健身</a>
+                        <a class="dropdown-item" href="">理财</a>
+                        <a class="dropdown-item" href="">社交</a>
+                        <a class="dropdown-item" href="">旅行</a>
+                        <a class="dropdown-item" href="">陪伴</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">运动/健身</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">理财</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">美食</a>
+                </li>
+
+                <!-- 搜索框 -->
+                <!-- 指定右对齐方式 -->
+                <form id="blog_form" class="form-inline my-2 my-lg-0 justify-content-end">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+            </ul>
+        </div>
+
+        <!-- 头条（头版） -->
+        <div class="blog_content">
+            <div class="jumbotron">
+                <h1 class="display-5">号外!</h1>
+                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra
+                    attention
+                    to featured content or information.</p>
+                <hr class="my-4">
+                <p>It uses utility classes for typography and spacing to space content out within the larger
+                    container.</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">查看更多</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="blog_content">
+                    <!-- 热门（头版） -->
+                    <div class="card mb-3" id="blog_hot_1">
+                        <!-- 图片垂直居中 -->
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-md-4">
+                                <img src="{{ url_for("static", filename="img/undraw_posting_photo.svg") }}"
+                                     class="card-img"
+                                     alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to
+                                        additional content. This content is a little bit longer.</p>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <a href="#" class="card-link justify-content-end">查看更多</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="blog_content">
+                    <!-- 热门（头版） -->
+                    <div class="card mb-3" id="blog_hot_2">
+                        <!-- 图片垂直居中 -->
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-md-4">
+                                <img src="{{ url_for("static", filename="img/undraw_posting_photo.svg") }}"
+                                     class="card-img"
+                                     alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to
+                                        additional content. This content is a little bit longer.</p>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <a href="#" class="card-link justify-content-end">查看更多</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- 文章内容部分 -->
+            <div class="col-lg-8">
+                {% for blog in data.items %}
+                    <div class="blog_content">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ blog.title }}</h5>
+                                <p class="card-text">{{ blog.content }}</p>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="#" class="card-link read-more">查看更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!-- 分页 -->
+                <div class="blog_paginate">
+                    {{ pg.page(data, "blog.index") }}
+                </div>
+
+            </div>
+
+            <!-- 右边栏时间轴、标签、分类、友情链接等 -->
+            <div class="col-lg-4">
+                <div class="blog_archives">
+                    <h3>blog档案</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">2020</a></li>
+                        <li class="list-group-item"><a href="#">2019</a></li>
+                        <li class="list-group-item"><a href="#">2018</a></li>
+                    </ul>
+                </div>
+
+                <div class="blog_elsewhere">
+                    <h3>友情链接</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">Github</a></li>
+                        <li class="list-group-item"><a href="#">Google</a></li>
+                        <li class="list-group-item"><a href="#">Baidu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script %}
+
+    <script>
+
+        $(function () {
+
+            <!-- 导航栏点击/切换事件 -->
+            $(".nav-link").on("click", function () {
+                $(".nav-link").removeClass("active");  //删除先前已选中元素样式
+                $(this).addClass("active");  //设置已选中状态
+           });
+
+            <!-- todo 服务端开发数据接口，点击事件触发查询内容操作，用于页面渲染 -->
+
+        })
+
+    </script>
+
+{% endblock %}
+

@@ -1,0 +1,194 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url_for("index.index") }}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">男儿当自强 <sup>up</sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - 首页 -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for("index.index") }}">
+            <i class="fas fa-fw fa-home"></i>
+            <span>首页</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- 大模块标题 -->
+    <div class="sidebar-heading">
+        产品/业务
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- 折叠菜单 -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUI"
+           aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-chart-bar"></i>
+            <span>UI自动化测试管理</span>
+        </a>
+        <div id="collapseUI" class="collapse" aria-labelledby="collapseUI" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">UI自动化:</h6>
+                <a class="collapse-item" href="">产品管理</a>
+                <a class="collapse-item" href="">业务管理</a>
+                <a class="collapse-item" href="">用例管理</a>
+                <a class="collapse-item" href="">任务管理</a>
+                <a class="collapse-item" href="">账号管理</a>
+                <a class="collapse-item" href="">套餐管理</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- 折叠菜单 -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInterface"
+           aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-chart-bar"></i>
+            <span>接口自动化测试管理</span>
+        </a>
+        <div id="collapseInterface" class="collapse" aria-labelledby="collapseInterface"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">接口自动化:</h6>
+                <a class="collapse-item" href="">版本管理</a>
+                <a class="collapse-item" href="">用例管理</a>
+                <a class="collapse-item" href="">任务管理</a>
+                <a class="collapse-item" href="">历史记录</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- 折叠菜单 -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCover"
+           aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-chart-bar"></i>
+            <span>代码覆盖率测试管理</span>
+        </a>
+        <div id="collapseCover" class="collapse" aria-labelledby="collapseCover"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">代码覆盖率:</h6>
+                <a class="collapse-item" href="">版本管理</a>
+                <a class="collapse-item" href="">历史记录</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- 折叠菜单 -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePerformance"
+           aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-chart-bar"></i>
+            <span>性能测试管理</span>
+        </a>
+        <div id="collapsePerformance" class="collapse" aria-labelledby="collapsePerformance"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">性能测试:</h6>
+                <a class="collapse-item" href="">版本管理</a>
+                <a class="collapse-item" href="">历史记录</a>
+                <a class="collapse-item" href="">压测记录</a>
+                <a class="collapse-item" href="">数据</a>
+                <a class="collapse-item" href="">日志</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <!-- 第二个标题栏 -->
+    <div class="sidebar-heading">
+        其它功能
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+           aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>服务器监控</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">性能监控报警:</h6>
+                <a class="collapse-item" href="">CPU</a>
+                <a class="collapse-item" href="">内存</a>
+                <a class="collapse-item" href="">IO</a>
+                <a class="collapse-item" href="">带宽</a>
+                <a class="collapse-item" href="">连接数</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">其它指标:</h6>
+                <a class="collapse-item" href="">吞吐率</a>
+                <a class="collapse-item" href="">事务处理</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog"
+           aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>博客/随笔</span>
+        </a>
+        <div id="collapseBlog" class="collapse" aria-labelledby="headingPages" data-parent="#collapseBlog">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">导航:</h6>
+                <a class="collapse-item" href="{{ url_for("blog.index", page=1) }}">首页</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">分类:</h6>
+                <a class="collapse-item" href="">学习笔记</a>
+                <a class="collapse-item" href="">读书笔记</a>
+                <a class="collapse-item" href="">随笔记录</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">总结:</h6>
+                <a class="collapse-item" href="">年度总结</a>
+                <a class="collapse-item" href="">阶段性总结</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>图表</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-table"></i>
+            <span>记录表</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>设置/配置</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>

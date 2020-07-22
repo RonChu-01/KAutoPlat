@@ -1,0 +1,93 @@
+{% extends "auth/base.html" %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/auth/login.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+
+        <div class="col-xl-4 col-lg-4 col-md-4">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <div class="row justify-content-center">
+                                        <img class="blog_icon" src="{{ url_for("static", filename="img/fly.png") }}" alt="">
+                                    </div>
+                                    <h1 id="blog_login_text" class="h4 text-gray-900 mb-4">登录/注册</h1>
+                                </div>
+                                <form class="user" method="post" onsubmit="return doLogin()">
+                                    <div class="form-group">
+                                        <input class="form-control form-control-user"
+                                               id="username" aria-describedby="emailHelp"
+                                               placeholder="请输入账号...">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                               id="password" placeholder="请输入密码">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">记住密码</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">登录</button>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <div class="row justify-content-around">
+                                        <a class="small" href="forgot-password.html">忘记密码?</a>
+                                        <a class="small" href="register.html">注册!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    function doLogin() {
+        var login = false;
+        $.ajax({
+            url: "/login",
+            data: "username=" + $("#username").val() + "&password=" + $("#password").val(),
+            type: 'POST',
+            async: false,
+            success: function (d) {
+                var status = d.status;
+                if (status !== '') {
+                    if (status === "-1") {
+                        alert("认证异常");
+                        login = false;
+                    } else {
+                        console.log("login success!");
+                        login = true;
+                    }
+                } else {
+                    alert("用户名或密码错误！");
+                    login = false;
+                }
+            }
+        });
+        return login;
+    }
+
+</script>
+
+{% endblock %}
+
+
+

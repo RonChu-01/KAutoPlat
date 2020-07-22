@@ -1,0 +1,20 @@
+#blog_form {
+    position: absolute;
+    right: 0;
+    padding-right: 10px;
+}
+
+.blog_content, .blog_tag, .blog_archives, .blog_elsewhere, .blog_paginate {
+    margin: 10px;
+}
+
+.read-more {
+    position: absolute;
+    right: 0;
+    padding-right: 20px;
+}
+
+.blog_elsewhere {
+    padding-top: 100px;
+}
+
