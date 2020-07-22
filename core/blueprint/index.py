@@ -3,7 +3,9 @@
 # Copyright (c) 2020 3KWan.
 # Description :
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session, redirect, url_for
+
+import flask_login
 
 
 bp = Blueprint("index", __name__, url_prefix="/index")
@@ -11,7 +13,9 @@ bp = Blueprint("index", __name__, url_prefix="/index")
 
 @bp.route("/", methods=("GET", "POST"))
 def index():
-    # username = request.form["username"]
-    # password = request.form["password"]
-    return render_template("index.html")
+
+    if "username" in session:
+        return render_template("index.html")
+    else:
+        return redirect(url_for("login.login"))
 
