@@ -20,7 +20,7 @@
                                     </div>
                                     <h1 id="blog_login_text" class="h4 text-gray-900 mb-4">登录/注册</h1>
                                 </div>
-                                <form class="user" method="post" onsubmit="return doLogin()">
+                                <form class="user" method="post" action="{{ url_for("index.index") }}" onsubmit="return doLogin()">
                                     <div class="form-group">
                                         <input class="form-control form-control-user"
                                                id="username" aria-describedby="emailHelp"
@@ -59,6 +59,7 @@
 {% block script %}
 <script>
 
+    // 登录认证（前端获取后端返回数据）
     function doLogin() {
         var login = false;
         $.ajax({
@@ -68,16 +69,32 @@
             async: false,
             success: function (d) {
                 var status = d.status;
+                //登录验证模态窗口
+                var blog_login_modal = $("#blog_login_modal");
                 if (status !== '') {
-                    if (status === "-1") {
-                        alert("认证异常");
+                    if (status === -1) {
+                        //alert("认证异常");
+                        //清空div内容
+                        blog_login_modal.empty();
+                        blog_login_modal.text("认证异常");
+                        //弹出模态窗口
+                        $("#logoutModal").modal({
+                            keyboard: false
+                        });
                         login = false;
                     } else {
                         console.log("login success!");
                         login = true;
                     }
                 } else {
-                    alert("用户名或密码错误！");
+                    //alert("用户名或密码错误！");
+                    //清空div内容
+                    blog_login_modal.empty();
+                    blog_login_modal.text("系统异常，请联系管理员!");
+                    //弹出模态窗口
+                    $("#logoutModal").modal({
+                        keyboard: false
+                    });
                     login = false;
                 }
             }
