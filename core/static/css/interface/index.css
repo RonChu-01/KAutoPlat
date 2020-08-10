@@ -16,3 +16,38 @@ select {
     margin-left: 20px;
     margin-right: 20px;
 }
+
+.card {
+    margin-top: 20px;
+}
+
+.table-responsive {
+    white-space:nowrap;  /* 需要加上这个，不然不换行不会生效 */
+    text-align: center;
+}
+
+.table-responsive th{
+    word-break:keep-all;
+}
+
+.table-responsive td{
+    word-break:keep-all;
+}
+
+.card {
+    font-size:14px;
+}
+
+.op-btn {
+    background-color: Transparent;
+    border-style: none;
+    outline: none;
+    font-size: 14px;
+    color: #4e73df;
+}
+
+.btn {
+    font-size: 14px;
+}
+
+
