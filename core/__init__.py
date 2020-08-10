@@ -8,6 +8,7 @@ from flask import Flask
 from core.blueprint import index
 from core.blueprint.auth import login
 from core.blueprint.blog import blog
+from core.blueprint.interface import interface
 from core.extensions import db
 from core.settings import configs
 
@@ -46,6 +47,7 @@ def register_blueprint(app):
     app.register_blueprint(index.bp)
     app.register_blueprint(blog.bp)
     app.register_blueprint(login.bp)
+    app.register_blueprint(interface.bp)
 
 
 def register_extensions(app):

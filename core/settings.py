@@ -28,7 +28,6 @@ class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = "mysql://root:chuy5945@localhost/autoplat?charset=utf8"  # mysql连接（本地mysql）
 
 
-
 # 配置映射
 configs = {
     "production": ProductionConfig,
