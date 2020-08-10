@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block style %}
+    <link rel="stylesheet"
+          href="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/css/bootstrap-select.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/interface/index.css") }}">
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/js/bootstrap-select.js") }}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <!-- 面包屑导航 -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">接口自动化测试管理</a></li>
+            <li class="breadcrumb-item active" aria-current="page">任务管理</li>
+        </ol>
+    </nav>
+
+    <!-- 条件筛选栏 -->
+    <div class="condition-screening">
+        <div class="container-fluid bg-gray-200">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="search">
+                        <label>任务id</label>
+                        <select class="selectpicker" data-live-search="true" data-width="50%">
+                            <option value="1">全部</option>
+                            <option value="2">成功</option>
+                            <option value="3">失败</option>
+                            <option value="4">跳过</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="search">
+                        <label>业务类型</label>
+                        <select class="selectpicker" data-live-search="true" data-width="50%">
+                            <option value="1">全部</option>
+                            <option value="2">成功</option>
+                            <option value="3">失败</option>
+                            <option value="4">跳过</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="search">
+                        <label>渠道</label>
+                        <select class="selectpicker" data-live-search="true" data-width="50%">
+                            <option value="1">全部</option>
+                            <option value="2">成功</option>
+                            <option value="3">失败</option>
+                            <option value="4">跳过</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="search">
+                        <label>版本</label>
+                        <select class="selectpicker" data-live-search="true" data-width="50%">
+                            <option value="1">全部</option>
+                            <option value="2">成功</option>
+                            <option value="3">失败</option>
+                            <option value="4">跳过</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="search">
+                        <label>类型</label>
+                        <select class="selectpicker" data-live-search="true" data-width="50%">
+                            <option value="1">全部</option>
+                            <option value="2">成功</option>
+                            <option value="3">失败</option>
+                            <option value="4">跳过</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="search">
+                        <label>任务状态</label>
+                        <select class="selectpicker" data-live-search="true" data-width="50%">
+                            <option value="1">全部</option>
+                            <option value="2">成功</option>
+                            <option value="3">失败</option>
+                            <option value="4">跳过</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="search">
+                        <div class="row">
+                            <div class="search-btn">
+                                <button type="button" class="btn btn-primary">搜索</button>
+                            </div>
+
+                            <div class="create-btn">
+                                <button type="button" class="btn btn-success">新增测试任务</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
