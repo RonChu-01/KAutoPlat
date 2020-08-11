@@ -50,4 +50,10 @@ select {
     font-size: 14px;
 }
 
-
+.task-id-input {
+    outline:0;
+    border:none;
+    width: 160px;
+    height: 35px;
+    border-radius: 5px;
+}

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% import "macro/pages.html" as pg %}
+
 {% block style %}
     <link rel="stylesheet"
           href="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/css/bootstrap-select.min.css") }}">
@@ -29,12 +31,7 @@
                         <div class="col-md-4">
                             <div class="search">
                                 <label>任务id</label>
-                                <select class="selectpicker" data-live-search="true" data-width="50%">
-                                    <option value="1">全部</option>
-                                    <option value="2">成功</option>
-                                    <option value="3">失败</option>
-                                    <option value="4">跳过</option>
-                                </select>
+                                  <input class="task-id-input" type="text" placeholder="请输入id">
                             </div>
                         </div>
 
@@ -163,6 +160,12 @@
                                     </td>
                                 </tr>
                             {% endfor %}
+
+                            <!-- 分页 -->
+{#                            <div class="blog_paginate">#}
+{#                                {{ pg.page(tasks, "blog.index") }}#}
+{#                            </div>#}
+
                         </tbody>
                     </table>
                 </div>
