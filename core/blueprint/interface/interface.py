@@ -64,6 +64,7 @@ def api_v1_buss_type():
     """
 
     # todo 这里为模拟数据，待建表
+    # 处理策略，选择业务类型的时候就先去查询下级
     data = {
         "0": "国内",
         "1": "独立",
@@ -77,7 +78,7 @@ def api_v1_buss_type():
     })
 
 
-@bp.route("/api/v1/channel")
+@bp.route("/api/v1/channel", methods=("GET", "POST"))
 def api_v1_channel():
     """
         渠道
@@ -107,7 +108,7 @@ def api_v1_channel():
     })
 
 
-@bp.route("/api/v1/api/version")
+@bp.route("/api/v1/version", methods=("GET", "POST"))
 def api_v1_api_version():
     """
         接口版本
@@ -129,7 +130,7 @@ def api_v1_api_version():
     })
 
 
-@bp.route("/api/v1/task_type")
+@bp.route("/api/v1/task_type", methods=("GET", "POST"))
 def api_v1_task_type():
     """
         任务类型
@@ -149,7 +150,7 @@ def api_v1_task_type():
     })
 
 
-@bp.route("/api/v1/task_status")
+@bp.route("/api/v1/task_status", methods=("GET", "POST"))
 def api_v1_task_status():
     """
         任务状态
@@ -172,7 +173,7 @@ def api_v1_task_status():
     })
 
 
-if __name__ == '__main__':
-    data = [1, 2, 2, 3, 5, 6]
-    print(random.choice([c for c in channel.keys()]))
+# if __name__ == '__main__':
+#     data = [1, 2, 2, 3, 5, 6]
+#     print(random.choice([c for c in channel.keys()]))
 
