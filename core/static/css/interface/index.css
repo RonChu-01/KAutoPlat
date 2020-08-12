@@ -108,5 +108,9 @@ label {
 
 /* 设置placeholder文字偏移 */
 input::-webkit-input-placeholder{
+    /*padding-left: 10px;*/
+}
+
+input{
     padding-left: 10px;
 }
