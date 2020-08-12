@@ -105,3 +105,8 @@ label {
 /*    !*为下拉小箭头留出一点位置，避免被文字覆盖*!*/
 /*    padding-right: 14px;*/
 /*}*/
+
+/* 设置placeholder文字偏移 */
+input::-webkit-input-placeholder{
+    padding-left: 10px;
+}
