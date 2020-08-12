@@ -8,10 +8,6 @@ label {
     text-align: right;
 }
 
-select {
-    vertical-align:middle;
-}
-
 .search-btn {
     margin-left: 20px;
     margin-right: 20px;
@@ -57,3 +53,55 @@ select {
     height: 35px;
     border-radius: 5px;
 }
+
+/* 指定原始下拉图标 */
+.dropdown-toggle {
+    background-image: url("../../img/down.png");
+    background-repeat: no-repeat;
+    background-position: right 10px center;  /* 背景图右边居中，往左边移动10px */
+    background-color: white;
+}
+
+/* 添加down属性，用于改变图标 */
+.dropdown-toggle.down {
+    background-image: url("../../img/up.png");
+}
+
+/* 添加delete属性，用于改变图标 */
+.dropdown-toggle.delete {
+    background-image: url("../../img/delete-btn.png");
+}
+
+/* 按钮悬停 */
+/*.dropdown-toggle:hover {*/
+/*    background-image: url("../../img/delete-btn.png");*/
+/*}*/
+
+/* 复写dropdown-toggle::after样式，清空下拉图标 */
+.dropdown-toggle::after {
+    display: none;
+    /*margin-left: .255em;*/
+    /*vertical-align: .255em;*/
+    /*content: "";*/
+    /*border-top: .3em solid;*/
+    /*border-right: .3em solid transparent;*/
+    /*border-bottom: 0;*/
+    /*border-left: .3em solid transparent*/
+}
+
+/*select {*/
+/*    !*Chrome和Firefox里面的边框是不一样的，所以复写了一下*!*/
+/*    border: solid 20px #000 !important;*/
+
+/*    !*很关键：将默认的select选择框样式清除*!*/
+/*    appearance:none;*/
+/*    -moz-appearance:none;*/
+/*    -webkit-appearance:none;*/
+
+/*    !*在选择框的最右侧中间显示小箭头图片*!*/
+/*    background: url("../../img/delete-btn.png") no-repeat scroll right center transparent !important;*/
+
+
+/*    !*为下拉小箭头留出一点位置，避免被文字覆盖*!*/
+/*    padding-right: 14px;*/
+/*}*/

@@ -5,11 +5,8 @@
 {% block style %}
     <link rel="stylesheet"
           href="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/css/bootstrap-select.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="vendor/font-awesome-4.7.0/css/font-awesome.min.css") }}">
     <link rel="stylesheet" href="{{ url_for("static", filename="css/interface/index.css") }}">
-{% endblock %}
-
-{% block script %}
-    <script src="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/js/bootstrap-select.js") }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -38,11 +35,7 @@
                         <div class="col-md-4">
                             <div class="search">
                                 <label>业务类型</label>
-                                <select class="selectpicker" data-live-search="true" data-width="50%">
-                                    <option value="1">全部</option>
-                                    <option value="2">成功</option>
-                                    <option value="3">失败</option>
-                                    <option value="4">跳过</option>
+                                <select id="buss_type" class="selectpicker" data-live-search="true" data-width="50%">
                                 </select>
                             </div>
                         </div>
@@ -50,11 +43,7 @@
                         <div class="col-md-4">
                             <div class="search">
                                 <label>渠道</label>
-                                <select class="selectpicker" data-live-search="true" data-width="50%">
-                                    <option value="1">全部</option>
-                                    <option value="2">成功</option>
-                                    <option value="3">失败</option>
-                                    <option value="4">跳过</option>
+                                <select id="channel" class="selectpicker" data-live-search="true" data-width="50%">
                                 </select>
                             </div>
                         </div>
@@ -65,10 +54,6 @@
                             <div class="search">
                                 <label>版本</label>
                                 <select class="selectpicker" data-live-search="true" data-width="50%">
-                                    <option value="1">全部</option>
-                                    <option value="2">成功</option>
-                                    <option value="3">失败</option>
-                                    <option value="4">跳过</option>
                                 </select>
                             </div>
                         </div>
@@ -76,10 +61,6 @@
                             <div class="search">
                                 <label>类型</label>
                                 <select class="selectpicker" data-live-search="true" data-width="50%">
-                                    <option value="1">全部</option>
-                                    <option value="2">成功</option>
-                                    <option value="3">失败</option>
-                                    <option value="4">跳过</option>
                                 </select>
                             </div>
                         </div>
@@ -87,10 +68,6 @@
                             <div class="search">
                                 <label>任务状态</label>
                                 <select class="selectpicker" data-live-search="true" data-width="50%">
-                                    <option value="1">全部</option>
-                                    <option value="2">成功</option>
-                                    <option value="3">失败</option>
-                                    <option value="4">跳过</option>
                                 </select>
                             </div>
                         </div>
@@ -173,6 +150,243 @@
         </div>
     </div>
 
+{% endblock %}
 
 
+{% block script %}
+    <script src="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/js/bootstrap-select.js") }}"></script>
+
+    <script type="text/javascript">
+
+        var buss_type_list_content = {};  // 业务类型列表内容
+        var channel_list_content = {};  // 渠道列表
+        var version_list = {};  // 版本列表
+        var task_type_list = {};  // 任务类型列表
+        var task_status_list = {};  // 任务状态列表
+
+
+        function query_buss_type(obj) {
+            /**
+             * 查询业务类型
+             * @returns
+             */
+
+            var url = host + "/interface/api/v1/buss_type";
+            var methods = "POST";
+            var params = {};
+
+            http(url, params, methods, function success(data) {
+
+                var content = data.data;
+
+                var addhtml = "<option selected value=\"0\">请选择</option>";
+
+                $.each(content, function (k, v) {
+                    addhtml += "<option value=" + (parseInt(k) + 1) + ">" + v + "</option>";
+                });
+
+                $(obj).html(addhtml);
+
+                // 刷新动态填充数据
+                $('.selectpicker').selectpicker('refresh');
+
+                $('.selectpicker').selectpicker('render');
+
+            }, function fail(data) {
+
+            });
+
+        }
+
+        function get_buss_type_list() {
+            /**
+             * 获取业务类型列表
+             * @returns
+             */
+
+            var buss_type = {
+                "0": "国内",
+                "1": "独立",
+                "2": "海外"
+            };
+
+            var addhtml = "<option disabled selected hidden value=\"0\">请选择</option>";
+
+            $.each(buss_type, function (k, v) {
+                addhtml += "<option value=" + (parseInt(k) + 1) + ">" + v + "</option>";
+            });
+
+            buss_type_list_content = addhtml;
+
+        }
+
+        function render_list(obj, content){
+            /**
+             * 渲染业务类型列表
+             * @returns
+             */
+
+            $(obj).html(content);
+
+            // 刷新动态填充数据
+            $('.selectpicker').selectpicker('refresh');
+
+            $('.selectpicker').selectpicker('render');
+        }
+
+        function query_list_info(type) {
+            /**
+             * 获取列表信息（搜索面板）
+             * @returns
+             */
+
+            var url = host + "/interface/api/v1/" + type;
+            var methods = "POST";
+            var params = {};
+
+            http(url, params, methods, function success(data) {
+
+                var content = data.data;
+
+                var addhtml = "<option disabled selected hidden value=\"0\">请选择</option>";
+
+                $.each(content, function (k, v) {
+                    // addhtml += "<option value=" + (parseInt(k) + 1) + ">" + v + "</option>";
+                    addhtml += "<option value=" + k + ">" + v + "</option>";
+                });
+
+                if (type === "channel") {
+                    channel_list_content = addhtml;
+                } else if (type === "version") {
+                    version_list = addhtml;
+                } else if (type === "task_type") {
+                    task_type_list = addhtml;
+                } else if (type === "task_status") {
+                    task_status_list = addhtml;
+                }
+
+            }, function fail(data) {
+                console.log("查询" + type + "失败");
+            });
+        }
+
+        function pre_loading(){
+            /**
+             * 预加载部分内容，优化体验
+             */
+
+            query_list_info("version");
+            query_list_info("task_type");
+            query_list_info("task_status");
+
+        }
+
+        $(function () {
+
+            // 执行预加载
+            pre_loading();
+
+            // 默认内容
+            $(".selectpicker").selectpicker({
+                noneSelectedText: '请选择'
+            });
+
+            // select 控件选中事件
+            $(".selectpicker").on("changed.bs.select", function () {
+                var dropdown_btn = $(this).next();  // 获取下拉按钮，添加icon图标
+                /* 移除down属性，用于改变图标 */
+                dropdown_btn.removeClass("down");
+            });
+
+            /**
+             * select 控件展开事件
+             */
+            $(".selectpicker").on("shown.bs.select", function () {
+                var dropdown_btn = $(this).next();  // 获取下拉按钮，添加icon图标
+                /* 添加down属性，用于改变图标 */
+                dropdown_btn.addClass("down");
+
+                // 获取标签内容，用于区分
+                var label_text = $(this).parent().prev().html();
+
+                // 第一次直接请求
+                if ($.trim(label_text) === "业务类型" && Object.keys(buss_type_list_content).length === 0) {
+                    get_buss_type_list();
+                    render_list(this, buss_type_list_content);
+                    query_list_info("channel");
+                } else if ($.trim(label_text) === "渠道" && Object.keys(channel_list_content === 0)){
+                    var is_select_buss_type = $("#buss_type").next().text();
+                    // 如果业务类型没选中不渲染页面（业务类型和渠道级联查询）
+                    if ($.trim(is_select_buss_type) !== "请选择") {
+                        // 解决一直渲染，做优化，仅初始状态做渲染操作
+                        if ($.trim($(this).next().text()) === "请选择") {
+                            render_list(this, channel_list_content)
+                        }
+                    }
+                } else if ($.trim(label_text) === "版本") {
+                    // 仅初始状态做渲染操作
+                    if ($.trim($(this).next().text()) === "请选择") {
+                        render_list(this, version_list);
+                    }
+                } else if ($.trim(label_text) === "类型") {
+                    // 仅初始状态做渲染操作
+                    if ($.trim($(this).next().text()) === "请选择") {
+                        render_list(this, task_type_list);
+                    }
+                } else if ($.trim(label_text) === "任务状态"){
+                    // 仅初始状态做渲染操作
+                    if ($.trim($(this).next().text()) === "请选择") {
+                        render_list(this, task_status_list);
+                    }
+                }
+            });
+
+             // select 控件选中事件
+            $(".selectpicker").on("hidden.bs.select", function () {
+                var dropdown_btn = $(this).next();  // 获取下拉按钮，添加icon图标
+                /* 移除down属性，用于改变图标 */
+                dropdown_btn.removeClass("down");
+            });
+
+            // 悬停事件处理
+            $(".dropdown-toggle").hover(function () {
+
+                // 获取输入框的值（其实是按钮）
+                var content = $(this).text();
+                // 已选中
+                if ($.trim(content) !== "请选择"){
+                    $(this).addClass("delete");
+                    // 被点击，清空样式
+                    $(".dropdown-toggle").on("click", function (event) {
+                        $(this).removeClass("delete");
+                    })
+                }
+            }, function () {
+                // 鼠标焦点移开事件清空样式
+                $(this).removeClass("delete")
+            });
+
+            // 点击事件（清空业务类型）
+            $(".dropdown-toggle").on("click", function (event) {
+                // 获取控件元素的位置
+                var x = $(this).width();
+                var y = $(this).height();
+                // 获取点击位置（点击控件的位置）
+                var click_x = event.offsetX;
+                var click_y = event.offsetY;
+
+                // 点击位置判断
+                if ($(this).hasClass("delete") && click_x > (x / 2 + 50)){
+                    // 恢复初始状态
+                    $(this).prev().selectpicker('val',['noneSelectedText']);
+                    // 业务类型关联渠道
+                    if ($(this).prev().attr("id") === "buss_type") {
+                        $("#channel").selectpicker('val',['noneSelectedText']);
+                    }
+                }
+            });
+
+        });
+
+    </script>
 {% endblock %}
