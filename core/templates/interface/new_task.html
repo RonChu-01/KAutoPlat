@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block style %}
+    <link rel="stylesheet"
+          href="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/css/bootstrap-select.min.css") }}">
+    <link rel="stylesheet"
+          href="{{ url_for("static", filename="vendor/font-awesome-4.7.0/css/font-awesome.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/interface/index.css") }}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- 面包屑导航 -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for("interface.index") }}">接口自动化测试管理</a></li>
+            <li class="breadcrumb-item active" aria-current="page">新增测试任务</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="container-fluid bg-gray-200">
+
+                <div class="new_content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="search">
+                                <label><i class="fa fa-asterisk" aria-hidden="true"></i>业务类型</label>
+                                <select id="buss_type" class="selectpicker" data-live-search="true" data-width="50%">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="search">
+                                <label><i class="fa fa-asterisk" aria-hidden="true"></i>渠道</label>
+                                <select id="buss_type" class="selectpicker" data-live-search="true" data-width="50%">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="search">
+                                <label><i class="fa fa-asterisk" aria-hidden="true"></i>版本</label>
+                                <select id="buss_type" class="selectpicker" data-live-search="true" data-width="50%">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="btn_group">
+                                <div class="row">
+                                    <div class="commit_btn">
+                                        <button id="commit_btn" type="button" class="btn btn-primary">提交</button>
+                                    </div>
+
+                                    <div class="cancel_btn">
+                                        <button id="cancel_btn" type="button" class="btn btn-secondary">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for("static", filename="vendor/bootstrap-select-1.13.14/js/bootstrap-select.js") }}"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            // 默认内容
+            $(".selectpicker").selectpicker({
+                noneSelectedText: '请选择'
+            });
+
+            // 取消按钮点击事件监听
+            $("#cancel_btn").on("click", function () {
+                var url = host + "/interface";
+                window.location.href = url;  // 页面跳转
+            });
+
+            // 提交按钮点击事件监听
+            $("#commit_btn").on("click", function () {
+                var url = host + "/interface/api/v1/add_task";
+                var params = {
+                    "buss_type": "",
+                    "channel": "",
+                    "version": "",
+                };
+                var methods = "POST";
+
+                http(url, params, methods, function success() {
+                    var url = host + "/interface";
+                    window.location.href = url;  // 页面跳转
+                }, function fail() {
+
+                })
+
+            })
+
+        })
+
+    </script>
+{% endblock %}
+
