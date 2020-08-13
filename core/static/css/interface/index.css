@@ -114,3 +114,27 @@ input::-webkit-input-placeholder{
 input{
     padding-left: 10px;
 }
+
+.search label i {
+    font-size: 12px;  /* 浏览器最小支持字体大小 */
+    padding-right: 5px;
+    color: red;
+    display: inline-block;
+    -webkit-text-size-adjust:none;
+    -webkit-transform : scale(0.66, 0.66);  /* 用于更改字体大小，支持小于12px的字体 */
+    /*-webkit-transform : scale(0.5, 0.5);  !* 用于更改字体大小，支持小于12px的字体 *!*/
+}
+
+.new_content {
+    padding-left: 100px;
+}
+
+.btn_group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+}
+
+.commit_btn {
+    margin-right: 10px;
+}
