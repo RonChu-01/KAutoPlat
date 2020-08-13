@@ -7,54 +7,35 @@ import random
 
 from faker import Faker
 from flask import Blueprint, render_template, jsonify, request
+from sqlalchemy import or_
+
+from core.models.interface.models import TaskInfo
 
 bp = Blueprint("interface", __name__, url_prefix="/interface")
 
-channel = {
-    "3k": "3k",
-    "360": "360",
-    "mi": "小米",
-    "91": "91",
-    "wandou": "豌豆荚",
-    "dangle": "当乐",
-    "oppo": "oppo",
-    "duoku": "百度",
-    "uc": "uc",
-    "huawei": "华为",
-    "vivo": "步步高",
-    "4399": "4399"
-}
 
+@bp.route("/<int:page>", methods=("GET", "POST"))
+def index(page):
+    """
 
-@bp.route("/", methods=("GET", "POST"))
-def index():
+    :param page:
+    :return:
+    """
 
-    # todo 需要做级联查询
+    if page is None:
+        page = 1
 
-    tasks = []
-
-    fake = Faker("zh_CN")
-
-    for i in range(50):
-        task_info = dict()
-        task_info.setdefault("task_id", i)
-        task_info.setdefault("channel", random.choice([_ for _ in channel.keys()]))
-        task_info.setdefault("buss_type", random.choice([_ for _ in ["国内", "独立", "海外"]]))
-        task_info.setdefault("version", "v4")
-        task_info.setdefault("task_type", random.choice([_ for _ in ["自建", "jenkins"]]))
-        task_info.setdefault("task_status", random.choice([_ for _ in ["成功", "失败", "排队中", "执行中", "未执行"]]))
-        task_info.setdefault("notice", random.choice([_ for _ in ["发送成功", "发送失败", "未发送"]]))
-        task_info.setdefault("sponsor", random.choice([_ for _ in ["admin", "test", "dev"]]))
-        task_info.setdefault("create_time", fake.date_time(tzinfo=None))
-        task_info.setdefault("complete_time", fake.date_time(tzinfo=None))
-        task_info.setdefault("test_report", "https://wwww.baidu.com")
-        tasks.append(task_info)
+    tasks = TaskInfo.query.order_by(TaskInfo.create_time.desc()).paginate(page=page, per_page=10)
 
     return render_template("interface/index.html", tasks=tasks)
 
 
 @bp.route("/new_task", methods=("GET", "POST"))
 def new_task():
+    """
+
+    :return:
+    """
     return render_template("interface/new_task.html")
 
 
@@ -186,31 +167,37 @@ def api_v1_search_by_condition():
     :return:
     """
 
+    results = []
+
     params = request.get_json()
 
-    tasks = []
+    # 按条件筛选测试任务
+    rows = TaskInfo.query.filter(
+        or_(
+            TaskInfo.id == params.get("id"),
+            TaskInfo.buss_type == params.get("buss_type"),
+            TaskInfo.channel_name == params.get("channel_name"),
+            TaskInfo.sdk_version == params.get("sdk_version"),
+            TaskInfo.task_type == params.get("task_type"),
+            TaskInfo.task_status == params.get("task_status")
+        )
+    ).all()
 
-    fake = Faker("zh_CN")
-
-    for i in range(20):
-        task_info = dict()
-        task_info.setdefault("task_id", i)
-        task_info.setdefault("channel", random.choice([_ for _ in channel.keys()]))
-        task_info.setdefault("buss_type", random.choice([_ for _ in ["国内", "独立", "海外"]]))
-        task_info.setdefault("version", "v4")
-        task_info.setdefault("task_type", random.choice([_ for _ in ["自建", "jenkins"]]))
-        task_info.setdefault("task_status", random.choice([_ for _ in ["成功", "失败", "排队中", "执行中", "未执行"]]))
-        task_info.setdefault("notice", random.choice([_ for _ in ["发送成功", "发送失败", "未发送"]]))
-        task_info.setdefault("sponsor", random.choice([_ for _ in ["admin", "test", "dev"]]))
-        task_info.setdefault("create_time", fake.date_time(tzinfo=None))
-        task_info.setdefault("complete_time", fake.date_time(tzinfo=None))
-        task_info.setdefault("test_report", "https://wwww.baidu.com")
-        tasks.append(task_info)
+    # 如果按条件查询结果存在，返回查询结果，否则返回全部数据
+    if rows:
+        for row in rows:
+            result = row.multi_to_dict()
+            results.append(result)
+    else:
+        rows = TaskInfo.query.all()
+        for row in rows:
+            result = row.multi_to_dict()
+            results.append(result)
 
     return jsonify({
         "code": 0,
         "msg": "ok",
-        "data": tasks
+        "data": results
     })
 
 

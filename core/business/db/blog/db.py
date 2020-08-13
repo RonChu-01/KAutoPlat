@@ -2,8 +2,10 @@
 # Created by #chuyong, on 2020/7/20 5:45 下午.
 # Copyright (c) 2020 3KWan.
 # Description :
+
 from core.extensions import db
 from core.models.blog.models import Blog
+from core.models.interface.models import TaskInfo
 
 
 def insert_into_blog(**data):
@@ -14,24 +16,11 @@ def insert_into_blog(**data):
     db.session.commit()
 
 
-def query_all_blog():
-    """ 获取全部文章 """
+def insert_into_task_info(**data):
+    """ 任务信息入库 """
+    blog = TaskInfo(**data)
+    db.session.add(blog)
+    db.session.commit()
 
-    try:
-        rows = db.session.query(Blog).filter().all()
-    except Exception as e:
-        print(str(e))
-        return None
-    else:
 
-        results = []
 
-        if rows:
-            for row in rows:
-                result = row.multi_to_dict()
-                results.append(result)
-
-            return results
-
-        else:
-            return None
