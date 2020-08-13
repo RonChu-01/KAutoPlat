@@ -417,10 +417,9 @@
                             html += "<td>" + task.task_status + "</td>";
                             html += "<td>" + task.notice + "</td>";
                             html += "<td>" + task.sponsor + "</td>";
-                            html += "<td>" + task.create_time + "</td>";
-                            html += "<td>" + task.complete_time + "</td>";
-                            html += "<td>" + task.create_time + "</td>";
-                            html += "<td><a href=\"task.test_report\" target=\"_blank\"></a>详情</td>";
+                            html += "<td>" + getFormatDate(task.create_time) + "</td>";
+                            html += "<td>" + getFormatDate(task.complete_time) + "</td>";
+                            html += '<td><a href="' + task.test_report + '" target="_blank">详情</a></td>';
                             html += "<td>";
                                 html += "<button class=\"op-btn\"><span>执行测试</span></button>";
                                 html += "<button class=\"op-btn\"><span>编辑</span></button>";
