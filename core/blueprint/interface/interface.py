@@ -6,7 +6,7 @@
 import random
 
 from faker import Faker
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template, jsonify, request
 
 bp = Blueprint("interface", __name__, url_prefix="/interface")
 
@@ -170,6 +170,42 @@ def api_v1_task_status():
         "code": 0,
         "msg": "",
         "data": data
+    })
+
+
+@bp.route("/api/v1/search_by_condition", methods=("GET", "POST"))
+def api_v1_search_by_condition():
+    """
+        按条件搜索
+
+    :return:
+    """
+
+    params = request.get_json()
+
+    tasks = []
+
+    fake = Faker("zh_CN")
+
+    for i in range(20):
+        task_info = dict()
+        task_info.setdefault("task_id", i)
+        task_info.setdefault("channel", random.choice([_ for _ in channel.keys()]))
+        task_info.setdefault("buss_type", random.choice([_ for _ in ["国内", "独立", "海外"]]))
+        task_info.setdefault("version", "v4")
+        task_info.setdefault("task_type", random.choice([_ for _ in ["自建", "jenkins"]]))
+        task_info.setdefault("task_status", random.choice([_ for _ in ["成功", "失败", "排队中", "执行中", "未执行"]]))
+        task_info.setdefault("notice", random.choice([_ for _ in ["发送成功", "发送失败", "未发送"]]))
+        task_info.setdefault("sponsor", random.choice([_ for _ in ["admin", "test", "dev"]]))
+        task_info.setdefault("create_time", fake.date_time(tzinfo=None))
+        task_info.setdefault("complete_time", fake.date_time(tzinfo=None))
+        task_info.setdefault("test_report", "https://wwww.baidu.com")
+        tasks.append(task_info)
+
+    return jsonify({
+        "code": 0,
+        "msg": "ok",
+        "data": tasks
     })
 
 
