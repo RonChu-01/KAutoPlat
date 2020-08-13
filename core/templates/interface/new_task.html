@@ -13,7 +13,7 @@
     <!-- 面包屑导航 -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for("interface.index") }}">接口自动化测试管理</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for("interface.index", page=1) }}">接口自动化测试管理</a></li>
             <li class="breadcrumb-item active" aria-current="page">新增测试任务</li>
         </ol>
     </nav>
@@ -89,7 +89,7 @@
 
             // 取消按钮点击事件监听
             $("#cancel_btn").on("click", function () {
-                var url = host + "/interface";
+                var url = host + "/interface/1";
                 window.location.href = url;  // 页面跳转
             });
 
@@ -104,7 +104,7 @@
                 var methods = "POST";
 
                 http(url, params, methods, function success() {
-                    var url = host + "/interface";
+                    var url = host + "/interface/1";
                     window.location.href = url;  // 页面跳转
                 }, function fail() {
 

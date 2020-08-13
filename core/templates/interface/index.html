@@ -14,7 +14,7 @@
     <!-- 面包屑导航 -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for("interface.index") }}">接口自动化测试管理</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for("interface.index", page=1) }}">接口自动化测试管理</a></li>
             <li class="breadcrumb-item active" aria-current="page">任务管理</li>
         </ol>
     </nav>
@@ -117,15 +117,15 @@
                         </thead>
 
                         <tbody>
-                            {% for task in tasks %}
+                            {% for task in tasks.items %}
                                 <tr>
-                                    <td>{{ task.task_id + 1 }}</td>
-                                    <td>{{ task.channel }}</td>
+                                    <td>{{ task.id + 1 }}</td>
+                                    <td>{{ task.channel_name }}</td>
                                     <td>{{ task.buss_type }}</td>
-                                    <td>{{ task.version }}</td>
+                                    <td>{{ task.sdk_version }}</td>
                                     <td>{{ task.task_type }}</td>
                                     <td>{{ task.task_status }}</td>
-                                    <td>{{ task.notice }}</td>
+                                    <td>{{ task.wechat_notice_status }}</td>
                                     <td>{{ task.sponsor }}</td>
                                     <td>{{ task.create_time }}</td>
                                     <td>{{ task.complete_time }}</td>
@@ -137,14 +137,14 @@
                                     </td>
                                 </tr>
                             {% endfor %}
-
-                            <!-- 分页 -->
-{#                            <div class="blog_paginate">#}
-{#                                {{ pg.page(tasks, "blog.index") }}#}
-{#                            </div>#}
-
                         </tbody>
                     </table>
+                    <!-- 分页 -->
+                    <div class="blog_paginate">
+                        <div class="row justify-content-end">
+                            {{ pg.page(tasks, "interface.index") }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -392,12 +392,12 @@
                 var url = host + "/interface/api/v1/search_by_condition";
                 var methods = "POST";
                 var params = {
-                    "task_id": "",
+                    "id": "",
                     "buss_type": "",
-                    "channel": "",
-                    "version": "",
+                    "channel_name": "",
+                    "sdk_version": "",
                     "task_type": "",
-                    "stask_status": ""
+                    "task_status": ""
                 };
 
                 http(url, params, methods, function success(data) {
@@ -409,13 +409,13 @@
 
                     $.each(content, function (index, task) {
                         html += "<tr>";
-                            html += "<td>" + (parseInt(task.task_id) + 1) + "</td>";
-                            html += "<td>" + task.channel + "</td>";
+                            html += "<td>" + task.id + "</td>";
+                            html += "<td>" + task.channel_name + "</td>";
                             html += "<td>" + task.buss_type + "</td>";
-                            html += "<td>" + task.version + "</td>";
+                            html += "<td>" + task.sdk_version + "</td>";
                             html += "<td>" + task.task_type + "</td>";
                             html += "<td>" + task.task_status + "</td>";
-                            html += "<td>" + task.notice + "</td>";
+                            html += "<td>" + task.wechat_notice_status + "</td>";
                             html += "<td>" + task.sponsor + "</td>";
                             html += "<td>" + getFormatDate(task.create_time) + "</td>";
                             html += "<td>" + getFormatDate(task.complete_time) + "</td>";
