@@ -78,11 +78,11 @@
                             <div class="search">
                                 <div class="row">
                                     <div class="search-btn">
-                                        <button type="button" class="btn btn-primary">搜索</button>
+                                        <button id="search_btn" type="button" class="btn btn-primary">搜索</button>
                                     </div>
 
                                     <div class="create-btn">
-                                        <button type="button" class="btn btn-success">新增测试任务</button>
+                                        <button id="create_task_btn" type="button" class="btn btn-success">新增测试任务</button>
                                     </div>
                                 </div>
                             </div>
@@ -385,6 +385,57 @@
                     }
                 }
             });
+
+            // 查询按钮点击事件监听
+            $("#search_btn").on("click", function (event) {
+
+                var url = host + "/interface/api/v1/search_by_condition";
+                var methods = "POST";
+                var params = {
+                    "task_id": "",
+                    "buss_type": "",
+                    "channel": "",
+                    "version": "",
+                    "task_type": "",
+                    "stask_status": ""
+                };
+
+                http(url, params, methods, function success(data) {
+                    var content = data.data;
+
+                    $("tbody").empty();
+
+                    var html = "";
+
+                    $.each(content, function (index, task) {
+                        html += "<tr>";
+                            html += "<td>" + (parseInt(task.task_id) + 1) + "</td>";
+                            html += "<td>" + task.channel + "</td>";
+                            html += "<td>" + task.buss_type + "</td>";
+                            html += "<td>" + task.version + "</td>";
+                            html += "<td>" + task.task_type + "</td>";
+                            html += "<td>" + task.task_status + "</td>";
+                            html += "<td>" + task.notice + "</td>";
+                            html += "<td>" + task.sponsor + "</td>";
+                            html += "<td>" + task.create_time + "</td>";
+                            html += "<td>" + task.complete_time + "</td>";
+                            html += "<td>" + task.create_time + "</td>";
+                            html += "<td><a href=\"task.test_report\" target=\"_blank\"></a>详情</td>";
+                            html += "<td>";
+                                html += "<button class=\"op-btn\"><span>执行测试</span></button>";
+                                html += "<button class=\"op-btn\"><span>编辑</span></button>";
+                                html += "<button class=\"op-btn\"><span>删除</span></button>";
+                            html += "</td>";
+                        html += "</tr>"
+                    });
+
+                    $("tbody").html(html);
+
+
+                }, function fail(data) {
+
+                });
+            })
 
         });
 
