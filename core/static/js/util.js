@@ -50,3 +50,20 @@ String.prototype.format = function () {
         return s;
     }
 };
+
+function getFormatDate(data){
+    /**
+     * 格式化时间
+     * @type {Date}
+     */
+
+    var nowDate = new Date(data);
+    var year = nowDate.getFullYear();
+    var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+    var date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+    var hour = nowDate.getHours()< 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+    var minute = nowDate.getMinutes()< 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+    var second = nowDate.getSeconds()< 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+
+    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
+}
