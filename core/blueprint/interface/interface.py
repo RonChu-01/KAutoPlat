@@ -26,7 +26,7 @@ channel = {
 }
 
 
-@bp.route("/")
+@bp.route("/", methods=("GET", "POST"))
 def index():
 
     # todo 需要做级联查询
@@ -51,6 +51,11 @@ def index():
         tasks.append(task_info)
 
     return render_template("interface/index.html", tasks=tasks)
+
+
+@bp.route("/new_task", methods=("GET", "POST"))
+def new_task():
+    return render_template("interface/new_task.html")
 
 
 # ======================== 数据接口 ========================
@@ -206,6 +211,23 @@ def api_v1_search_by_condition():
         "code": 0,
         "msg": "ok",
         "data": tasks
+    })
+
+
+@bp.route("/api/v1/add_task", methods=("GET", "POST"))
+def api_v1_add_task():
+    """
+        新增测试任务（入库）
+
+    :return:
+    """
+
+    params = request.get_json()
+
+    return jsonify({
+        "code": 0,
+        "msg": "ok",
+        "data": ""
     })
 
 
